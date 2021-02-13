@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+      
+  
+    <changeSet author="Suresh" id="CREA-TABLE-transaction">
+        <sql>
+            CREATE TABLE public.transaction(
+                transaction_id SERIAL8,
+                transaction_code varchar unique,
+                transaction_status varchar DEFAULT 'SUCCESS',
+                transaction_from_account varchar DEFAULT 'SU1234567',
+                transaction_to_account varchar,
+                transaction_amount bigint,
+                transaction_desc varchar,
+                transaction_add_dtg TIMESTAMP DEFAULT NOW(),
+                CONSTRAINT transaction_pkey PRIMARY KEY (transaction_id)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE public.transaction;
+            </sql>
+        </rollback>
+    </changeSet>
+
+   
+
+ 
+  
+</databaseChangeLog>

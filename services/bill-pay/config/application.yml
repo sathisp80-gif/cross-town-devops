@@ -1,0 +1,17 @@
+server:
+  port: 5757
+
+spring:
+  application:
+    name: billpay-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/transaction
+    username: postgres
+    password: pass
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false

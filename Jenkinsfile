@@ -18,8 +18,8 @@ pipeline {
 
             steps{
                 sh 'echo "Started...!" '
-                sh 'chmod +x ./script/*'
-                sh 'bash ./script/launch_env.sh'
+                sh 'chmod +x ./cross-town-devops/script/*'
+                sh 'bash ./cross-town-devops/script/launch_env.sh'
 
             }
          }

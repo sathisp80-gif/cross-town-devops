@@ -18,8 +18,8 @@ pipeline {
 
             steps{
                 sh 'sudo pwd '
-                sh 'chmod +x ./cross-town-devops/script/*'
-                sh 'bash ./cross-town-devops/script/launch_env.sh'
+                sh 'sudo chmod +x ./cross-town-devops/scripts/*'
+                sh 'bash ./cross-town-devops/scripts/launch_env.sh'
 
             }
          }

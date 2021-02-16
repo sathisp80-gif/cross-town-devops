@@ -1,0 +1,5 @@
+---
+- hosts: slave
+  roles: 
+    - { role: instal-docker, tags: 'instal-docker' }
+

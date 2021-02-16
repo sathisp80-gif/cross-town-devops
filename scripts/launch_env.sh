@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for line in `cat instance.cfg`
+for line in `cat ./scripts/instance.cfg`
 do
         echo "Launch $line instance Starts";
         cd ../terraform/$line

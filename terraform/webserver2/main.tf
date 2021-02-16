@@ -10,4 +10,8 @@ resource "aws_instance" "devops_01" {
     tags = {
         Name = "webserv2-instance"
     }
+
+    provisioner "local-exec" {
+    command = "echo ${aws_instance.devops_01.private_ip} >> private_ips.txt"
+  }
 }

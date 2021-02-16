@@ -8,6 +8,6 @@ resource "aws_instance" "devops_01" {
     key_name = "crosstown"
 
     tags = {
-        Name = "webserv1-instance"
+        Name = "webserver1"
     }
 }

@@ -8,7 +8,7 @@ resource "aws_instance" "devops_01" {
     key_name = "crosstown"
 
     tags = {
-        Name = "webserv2-instance"
+        Name = "webserver2"
     }
 
     provisioner "local-exec" {

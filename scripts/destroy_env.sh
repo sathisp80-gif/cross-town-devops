@@ -1,8 +1,8 @@
 #!/bin/sh
-for line in `cat instance.cfg`
+for line in `cat $PWD/cross-town-devops/scripts/instance.cfg`
 do
         echo "Destroy Database instance starts:"$line
-        cd ../terraform/$line
+        cd $PWD/cross-town-devops/terraform/$line
         /usr/bin/terraform destroy -auto-approve
 
         if [ $? -ne 0 ]

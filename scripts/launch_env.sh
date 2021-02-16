@@ -1,9 +1,9 @@
 #!/bin/sh
 
-for line in `cat instance.cfg`
+for line in `cat $PWD/cross-town-devops/scripts/instance.cfg`
 do
         echo "Launch $line instance Starts";
-        cd ../terraform/$line
+        cd $PWD/cross-town-devops/terraform/$line
         /usr/bin/terraform init -input=false
         if [ $? -ne 0 ]
         then

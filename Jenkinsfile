@@ -29,6 +29,7 @@ pipeline {
 			sh 'sudo pwd '
 			sh 'whoami'
 			sh 'sudo bash ./cross-town-devops/scripts/configure_ssh.sh'
+			sh 'sudo bash ./cross-town-devops/scripts/ansible_config.sh'
 		}
 	}
     }

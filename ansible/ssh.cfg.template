@@ -1,0 +1,12 @@
+Host webserver1
+  Hostname	WEBSERVER1
+  User		ubuntu
+  IdentityFile 	./crosstown.pem
+Host database
+  Hostname	DATABASE
+  User		ubuntu
+  IdentityFile	./crosstown.pem
+Host webserver2
+  Hostname 	WEBSERVER2
+  User     	ubuntu
+  IdentityFile ./crosstown.pem

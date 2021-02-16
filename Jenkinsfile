@@ -24,5 +24,12 @@ pipeline {
 
             }
          }
+	stage('Configure ansible'){
+		steps{
+			sh 'sudo pwd '
+			sh 'whoami'
+			sh 'sudo bash ./cross-town-devops/scripts/configure_ssh.sh'
+		}
+	}
     }
 }

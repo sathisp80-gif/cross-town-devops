@@ -1,5 +1,5 @@
 ---
-- hosts: slave
+- hosts: webserv1
   roles: 
     - { role: instal-docker, tags: 'instal-docker' }
 

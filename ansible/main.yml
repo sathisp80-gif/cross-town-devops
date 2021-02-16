@@ -1,5 +1,10 @@
 ---
-- hosts: webserv1
+- hosts: webserver1
   roles: 
+    - { role: instal-docker, tags: 'instal-docker' }
+
+
+- hosts: webserver2
+  roles:
     - { role: instal-docker, tags: 'instal-docker' }
 

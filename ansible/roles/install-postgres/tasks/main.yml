@@ -1,0 +1,18 @@
+---
+- name: Install aptitude using apt
+  become: yes
+  apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+- debug:
+    msg:  Install aptitude using apt
+
+- name: Install required system packages
+  become: yes
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'bash', 'openssl', 'libssl-dev', 'libssl-doc', 'postgresql' , 'postgresql-contrib', 'postgresql-client', 'libpq-dev' ]
+
+- name: Ensure the PostgreSQL service is running
+  service: name=postgresql state=started enabled=yes
+
+- name: Create the database
+  shell: "PGPASSWORD={{ db_password }} psql -t -U {{ db_user }} -w -h 18.191.95.18 -p 5432 -d {{ db_name }} -c \"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '$DB_NAME'\";"

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "devops_01" {
-    ami = "ami-0996d3051b72b5b2c"
+    ami = "ami-02ac93c05ae3662c5"
     instance_type = "t2.micro"
     key_name = "crosstown"
 

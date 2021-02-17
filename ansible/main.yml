@@ -9,13 +9,7 @@
     - { role: instal-docker, tags: 'instal-docker' }
 
 - hosts: database
-  sudo: yes
-  sudo_user: root
-  remote_user: ubuntu
-  roles:
-    - createdb
-    - liquibase
-    - java
-    - {role: instal-docker, tags: 'instal-docker'}
+  tags: db-configuration
+  roles: 
+    - { role: install-postgres, tags: 'install-postgres' }
      
-

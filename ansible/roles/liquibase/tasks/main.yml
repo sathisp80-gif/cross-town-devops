@@ -1,0 +1,22 @@
+---
+- name: ensure liquibase is downloaded
+  stat: path="{{ liquibase.download_path }}"
+  register: st
+
+- name: download liquibase
+  get_url:
+    url: "{{ liquibase.download_url }}"
+    dest: "{{ liquibase.download_path }}"
+    mode: 0644
+  when:
+    st.exists is not defined
+
+- name: create liquibase installation directory
+  file: name="{{ liquibase.directory }}" state=directory owner=vagrant group=vagrant
+
+- name: install liquibase
+  shell: |
+    tar xf "{{ liquibase.download_path }}" -C "{{ liquibase.directory }}"
+  args:
+    warn: no
+  become_user: vagrant

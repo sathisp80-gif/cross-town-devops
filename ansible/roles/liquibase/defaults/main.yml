@@ -1,0 +1,5 @@
+---
+liquibase:
+  download_url: https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.5.1/liquibase-3.5.1-bin.tar.gz
+  download_path: /tmp/liquibase.tar.gz
+  directory: /opt/liquibase/

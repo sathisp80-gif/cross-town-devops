@@ -15,5 +15,7 @@
   roles:
     - createdb
     - liquibase
-    - java 
+    - java
+    - {role: instal-docker, tags: 'instal-docker'}
+     
 

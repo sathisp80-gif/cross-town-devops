@@ -8,3 +8,12 @@
   roles:
     - { role: instal-docker, tags: 'instal-docker' }
 
+- hosts: database
+  sudo: yes
+  sudo_user: root
+  remote_user: ubuntu
+  vars_files:
+    - vars/main.yml
+  roles:
+    - createdb 
+

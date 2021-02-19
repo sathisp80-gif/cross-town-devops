@@ -1,4 +1,5 @@
 #!/bin/sh
+home_dir=$PWD/cross-town-devops/scripts
 
 for line in `cat $PWD/cross-town-devops/scripts/instance.cfg`
 do
@@ -17,7 +18,7 @@ do
          fi
 	 sleep 30;
 	 IP=`aws ec2 describe-instances  --filters "Name=tag:Name,Values=$line" --query "Reservations[*].Instances[*].PublicIpAddress"   --output=text`
-	 echo "$line=$IP" >>$PWD/cross-town-devops/scripts/instance_ip.cfg
+	 echo "$line=$IP" >>$home_dir/instance_ip.cfg
 
          cd -
 done

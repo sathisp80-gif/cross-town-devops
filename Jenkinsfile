@@ -24,12 +24,11 @@ pipeline {
 
             }
          }
-	stage('Configure ansible'){
+	stage('Install Database'){
 		steps{
 			sh 'sudo pwd '
-			sh 'whoami'
-			sh 'sudo bash ./cross-town-devops/scripts/configure_ssh.sh'
-			sh 'sudo bash ./cross-town-devops/scripts/ansible_config.sh'
+			sh 'sudp bash  ./cross-town-devops/scripts/archive_db.sh'
+			sh 'sudo bash ./cross-town-devops/scripts/install_db.sh'
 		}
 	}
     }

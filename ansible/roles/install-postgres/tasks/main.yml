@@ -9,10 +9,24 @@
 - name: Install required system packages
   become: yes
   apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'bash', 'openssl', 'libssl-dev', 'libssl-doc', 'postgresql' , 'postgresql-contrib', 'postgresql-client', 'libpq-dev' ]
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'bash', 'openssl', 'libssl-dev', 'libssl-doc', 'postgresql' , 'postgresql-contrib', 'postgresql-client', 'libpq-dev', 'openjdk-8-jdk' ]
 
-- name: Ensure the PostgreSQL service is running
-  service: name=postgresql state=started enabled=yes
+- debug: 
+    msg: Execute the script
 
-- name: Create the database
-  shell: "PGPASSWORD={{ db_password }} psql -t -U {{ db_user }} -w -h 18.191.95.18 -p 5432 -d {{ db_name }} -c \"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '$DB_NAME'\";"
+- name: example copying file with owner and permissions
+  become: yes
+  copy:
+    src: /root/suresh/cross-town-devops/database/transaction.tar
+    dest: /tmp/transaction.tar
+
+- name: unarchive the tar
+  become: yes
+  unarchive:
+    src: /tmp/transaction.tar
+    dest: /tmp
+    remote_src: True
+
+- name: Execute liquibase to install database
+  become: yes
+  command: chdir=/tmp/transaction sh liquibase --driver=org.postgresql.Driver --changeLogFile=./changelog-master-transaction.xml --url="jdbc:postgresql://localhost:5432/transaction" --username=postgres --password=crosstown update

@@ -28,6 +28,7 @@ pipeline {
 	stage('Install Database'){
 		steps{
 			sh 'sudo pwd '
+			sh 'sudo chmod 400 ./cross-town-devops/ansible/crosstown.pem'
 			sh 'sudo bash  ./cross-town-devops/scripts/archive_db.sh'
 			sh 'sudo bash ./cross-town-devops/scripts/install_db.sh'
 		}

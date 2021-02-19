@@ -1,0 +1,13 @@
+---
+- debug: 
+    msg: Start deploying the docker
+
+- name: Copy the docker bin to dest
+  become: yes
+  copy:
+    src: /tmp/bill-pay.tar
+    dest: /tmp/bill-pay.tar
+
+- name: Load the docker image
+  become: yes
+  command: docker load -i /tmp/bill-pay.tar

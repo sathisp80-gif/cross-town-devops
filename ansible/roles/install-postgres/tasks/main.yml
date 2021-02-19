@@ -17,7 +17,7 @@
 - name: example copying file with owner and permissions
   become: yes
   copy:
-    src: /root/suresh/cross-town-devops/database/transaction.tar
+    src: /tmp/transaction.tar
     dest: /tmp/transaction.tar
 
 - name: unarchive the tar

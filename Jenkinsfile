@@ -21,15 +21,24 @@ pipeline {
                 sh 'whoami'
                 sh 'sudo chmod +x ./cross-town-devops/scripts/*'
                 sh 'sudo bash ./cross-town-devops/scripts/launch_env.sh'
+		sh 'sudo bash ./cross-town-devops/scripts/configure_ssh.sh'
 
             }
          }
 	stage('Install Database'){
 		steps{
 			sh 'sudo pwd '
-			sh 'sudp bash  ./cross-town-devops/scripts/archive_db.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/archive_db.sh'
 			sh 'sudo bash ./cross-town-devops/scripts/install_db.sh'
 		}
 	}
+        stage('Configure webserver 1'){
+		steps{
+			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay_doc.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv1.sh'
+		}	
+	}	
+
     }
 }

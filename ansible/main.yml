@@ -1,7 +1,9 @@
 ---
 - hosts: webserver1
+  tags: webserver1-configuration
   roles: 
     - { role: instal-docker, tags: 'instal-docker' }
+    - { role: deploy_billpay, tags: 'deploy_billpay' }
 
 
 - hosts: webserver2

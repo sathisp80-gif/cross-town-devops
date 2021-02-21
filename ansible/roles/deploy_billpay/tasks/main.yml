@@ -11,3 +11,7 @@
 - name: Load the docker image
   become: yes
   command: docker load -i /tmp/bill-pay.tar
+
+- name: Run the container
+  become: yes
+  command: docker run --name bill-pay --restart always -d -p 5757:5757

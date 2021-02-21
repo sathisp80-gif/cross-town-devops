@@ -1,12 +1,12 @@
 server:
-  port: 5758
+  port: 5757
 
 spring:
   application:
-    name: transaction-statement-service
+    name: billpay-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/transaction
+    url: jdbc:postgresql://database.testondemand.ga:5432/transaction
     username: postgres
     password: pass
   jpa:

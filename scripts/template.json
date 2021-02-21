@@ -1,0 +1,21 @@
+{
+    "Comment": "TODO a record ",
+    "Changes": 
+    [
+        {
+            "Action": "TODO",
+            "ResourceRecordSet": 
+            {
+                "Name": "INSTANCE.testondemand.ga",
+                "Type": "A",
+                "TTL": 300,
+                "ResourceRecords": 
+                [
+                    {
+                        "Value": "IP"
+                    }
+                ]
+            }
+        }
+    ]
+}

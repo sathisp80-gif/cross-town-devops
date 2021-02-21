@@ -8,7 +8,9 @@
 
 - hosts: webserver2
   roles:
+  tags: webserver2-configuration
     - { role: instal-docker, tags: 'instal-docker' }
+    - { role: deploy_statement, tags: 'deploy_statement' }
 
 - hosts: database
   tags: db-configuration

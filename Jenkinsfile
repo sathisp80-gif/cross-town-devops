@@ -21,7 +21,6 @@ pipeline {
                 sh 'whoami'
                 sh 'sudo chmod +x ./cross-town-devops/scripts/*'
                 sh 'sudo bash ./cross-town-devops/scripts/launch_env.sh'
-		sh 'sudo bash ./cross-town-devops/scripts/configure_ssh.sh'
 
             }
          }
@@ -39,7 +38,14 @@ pipeline {
 			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay_doc.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv1.sh'
 		}	
-	}	
+	}
+	stage('Configure webserver 2'){
+		steps{
+			sh 'sudo bash  ./cross-town-devops/scripts/build_statement.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/build_statement_doc.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/install_webserver2.sh'
+		}
+	}
 
     }
 }

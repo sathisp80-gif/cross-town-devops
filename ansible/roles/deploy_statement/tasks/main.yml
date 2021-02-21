@@ -1,0 +1,18 @@
+---
+- debug: 
+    msg: Start deploying the docker
+
+- name: Copy the docker bin to dest
+  become: yes
+  copy:
+    src: /tmp/transaction-statement.tar
+    dest: /tmp/transaction-statement.tar
+
+- name: Load the docker image
+  become: yes
+  command: docker load -i /tmp/transaction-statement.tar
+
+- name: Run the container
+  become: yes
+  command: docker run --name -transaction-statement -restart always -d -p 5758:5758
+

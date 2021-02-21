@@ -43,7 +43,7 @@ pipeline {
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement_doc.sh'
-			sh 'sudo bash  ./cross-town-devops/scripts/install_webserver2.sh'
+			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv2.sh'
 		}
 	}
 

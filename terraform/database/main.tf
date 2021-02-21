@@ -12,7 +12,7 @@ resource "aws_instance" "devops_01" {
     }
 }
 
-
+/**
 resource "aws_route53_zone" "main" {
   name = "testondemand.ga"
 }
@@ -32,4 +32,5 @@ resource "aws_route53_record" "database-ns" {
   ttl     = "30"
   records = aws_route53_zone.database.ns-477.awsdns-59.com.
 }
+**/
 

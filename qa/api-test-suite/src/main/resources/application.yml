@@ -1,0 +1,10 @@
+server:
+  port: 30002
+
+
+api-test-suite:
+  service:
+    user:
+      url: "http://127.0.0.1:50602"
+  config:
+    adminUser: 5

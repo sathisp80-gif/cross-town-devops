@@ -1,0 +1,68 @@
+stages:
+  - compile
+  - runtest
+
+compile:
+ stage: compile
+ tags:
+   - api-test-suite
+ except:
+   - master
+ script:
+   - bash /usr/bin/mvn compile
+ only:
+   variables:
+     - $ACTION != "RUN"
+
+.run_regression:
+  stage: runtest
+  tags:
+    - api-test-suite
+  script:
+    - /usr/bin/mvn $MAVEN_CLI_OPTS verify -Dtest=RunCucumberTest.java
+    - git clone https://sparktechies.scm:sparktechies@gitlab.com/closedgrouppayments/qa/api-reports.git
+    - mkdir -p api-reports/`date +%d%m%Y-%HH%MM` && cp -rf target/site/cucumber-reports/cucumber-html-reports/* "$_"
+    - cd api-reports
+    - ./generate_report.sh
+    - find * -type d -ctime +10 -exec rm -rf {} \;
+    - git config --global user.email "sparktechies.scm@gmail.com"
+    - git add .
+    - git commit -m "Added the report for the date `date +%d%m%Y`"
+    - git push
+    - cd ..
+    - bash /usr/bin/mvn clean
+    - rm -rf api-reports
+
+runtest:
+  extends: .run_regression
+  stage: runtest
+  tags:
+    - api-test-suite
+  only:
+    - master
+  except:
+    variables:
+      - $ACTION == "RUN"
+#  script:
+#    - /usr/bin/mvn $MAVEN_CLI_OPTS verify -Dtest=RunCucumberTest.java
+#    - git clone https://sparktechies.scm:sparktechies@gitlab.com/closedgrouppayments/qa/api-reports.git
+#    - mkdir -p api-reports/`date +%d%m%Y-%HH%MM` && cp -rf target/site/cucumber-reports/cucumber-html-reports/* "$_"
+#    - cd api-reports
+#    - ./generate_report.sh
+#    - git config --global user.email "sparktechies.scm@gmail.com"
+#    - git add .
+#    - git commit -m "Added the report for the date `date +%d%m%Y`"
+#    - git push
+#    - cd ..
+#    - bash /usr/bin/mvn clean
+#    - rm -rf api-reports
+
+regression_job:
+  extends: .run_regression
+  stage: runtest
+  allow_failure: true
+  tags:
+    - api-test-suite
+  only:
+    variables:
+      - $ACTION == "RUN"

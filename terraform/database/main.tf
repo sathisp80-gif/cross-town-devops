@@ -13,27 +13,23 @@ resource "aws_instance" "devops_01" {
 }
 
 
-resource "aws_route53_zone" "database_testondemand_ga" {
-name          = "database.testondemand.ga."
-comment       = "Managed by Terraform, NS delegate for third party provider"
-force_destroy = false
-tags {
-ManagedBy = "Terraform"
-}
+resource "aws_route53_zone" "main" {
+  name = "testondemand.ga"
 }
 
-resource "aws_route53_record" "database_testondemand_ga_zone_ns_record" {
-zone_id = "${aws_route53_zone.testondemand_com.Z07954263O9R4Y0C94383}"
-name    = "database"
-type    = "NS"
-records = ["ns-477.awsdns-59.com", "ns-563.awsdns-06.net"] 
-ttl = "86400" 
-} 
-resource "aws_route53_record" "database_testondemand_ga_zone_default_ns_record" { 
-zone_id = "${aws_route53_zone.testondemand_com.Z07954263O9R4Y0C94383}" 
-type    = "NS" 
-name    = "database.testondemand.ga" 
-records = ["ns-477.awsdns-59.com.", "ns-563.awsdns-06.net."] 
-ttl     = "86400" 
+resource "aws_route53_zone" "database" {
+  name = "database.testondemand.ga"
+
+  tags = {
+    Environment = "database"
+  }
+}
+
+resource "aws_route53_record" "database-ns" {
+  zone_id = aws_route53_zone.main.Z07954263O9R4Y0C94383
+  name    = "database.testondemand.ga"
+  type    = "NS"
+  ttl     = "30"
+  records = aws_route53_zone.database.ns-477.awsdns-59.com.
 }
 

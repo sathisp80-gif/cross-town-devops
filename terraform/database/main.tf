@@ -11,4 +11,3 @@ resource "aws_instance" "devops_01" {
         Name = "database"
     }
 }
-

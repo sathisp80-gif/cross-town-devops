@@ -46,6 +46,11 @@ pipeline {
 			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv2.sh'
 		}
 	}
+	stage('QA stage'){
+		steps{
+			sh 'sudo bash  ./cross-town-devops/scripts/runCucumber.sh'
+		}
+	}
 
     }
 }

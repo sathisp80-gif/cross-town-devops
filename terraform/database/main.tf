@@ -23,6 +23,6 @@ zone_id = aws_route53_zone.testondemand.Z07954263O9R4Y0C94383
 name = "database.testondemand.ga"
 type = "A"
 ttl = "300"
-records = [aws_instance.database.public_ip]
+records = [devops_01.database.public_ip]
 }
 

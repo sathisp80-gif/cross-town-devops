@@ -14,5 +14,5 @@
 
 - name: Run the container
   become: yes
-  command: docker run --name -transaction-statement -restart always -d -p 5758:5758
+  command: docker run -d -p 57581:5758 transaction-statement:latest
 

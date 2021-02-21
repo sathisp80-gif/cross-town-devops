@@ -17,7 +17,7 @@ do
                  echo "Terraform apply failed for the instance :"$line
                  exit 1;
          fi
-	 sleep 30;
+	 sleep 10;
 	 IP=`aws ec2 describe-instances  --filters "Name=tag:Name,Values=$line" --query "Reservations[*].Instances[*].PublicIpAddress"   --output=text`
 
 	sed -e "s/INSTANCE/$line/g"  $home_dir/template.json >$home_dir/$line.json

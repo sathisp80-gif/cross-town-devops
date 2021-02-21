@@ -14,4 +14,4 @@
 
 - name: Run the container
   become: yes
-  command: docker run --name bill-pay --restart always -d -p 5757:5757
+  command: docker run -d -p 57571:5757 bill-pay:latest

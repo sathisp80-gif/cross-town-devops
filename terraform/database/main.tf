@@ -34,3 +34,10 @@ resource "aws_route53_record" "database-ns" {
 }
 **/
 
+module "gsuite" {
+    source = "github.com/fallertsen/terraform-module-aws-route53-record"
+
+    domain = "testondemand.ga"
+    subdomain = "database"
+    records = [ "127.0.0.1" ]
+}

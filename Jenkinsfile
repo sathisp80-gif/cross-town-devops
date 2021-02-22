@@ -24,7 +24,7 @@ pipeline {
 
             }
          }
-	stage('Install Database'){
+	stage('Install and Configure Database'){
 		steps{
 			sh 'sudo pwd '
 			sh 'sudo chmod 400 ./cross-town-devops/ansible/crosstown.pem'
@@ -32,21 +32,21 @@ pipeline {
 			sh 'sudo bash ./cross-town-devops/scripts/install_db.sh'
 		}
 	}
-        stage('Configure webserver 1'){
+        stage('Configure & Deploy webserver 1'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay_doc.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv1.sh'
 		}	
 	}
-	stage('Configure webserver 2'){
+	stage('Configure & Deploy webserver 2'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement_doc.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/install_webserv2.sh'
 		}
 	}
-	stage('QA stage'){
+	stage('Run Automation Test'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/runCucumber.sh'
 		}

@@ -1,20 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Terraform Started'){
+        stage('X-Town Integ test - Started'){
 
             steps{
                 sh 'echo "Started...!" '
             }
         }
-            stage('git clone'){
+            stage('Load X-Town platform scripts'){
 
             steps{
                 sh 'sudo rm -r *;sudo git clone https://github.com/sathisp80-gif/cross-town-devops.git'
                  }
          }
         
-        stage('Create Servers'){
+        stage('Create Server instances'){
 
             steps{
                 sh 'sudo pwd '
@@ -24,7 +24,7 @@ pipeline {
 
             }
          }
-	stage('Install and Configure Database'){
+	stage('Install Database & Load Test Data'){
 		steps{
 			sh 'sudo pwd '
 			sh 'sudo chmod 400 ./cross-town-devops/ansible/crosstown.pem'

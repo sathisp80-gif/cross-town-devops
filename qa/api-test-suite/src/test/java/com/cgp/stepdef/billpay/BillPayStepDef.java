@@ -2,8 +2,8 @@ package com.cgp.stepdef.billpay;
 
 import com.cgp.apiClient.billPayService.BillPayService;
 import com.cgp.containers.memory.BillPayContainer;
-import com.cgp.containers.memory.SubEntityContainer;
 import com.cgp.containers.responses.GenericResponse;
+import com.cgp.containers.responses.StatementResponse;
 import com.cgp.containers.responses.TransactionDao;
 import com.cgp.dao.TransactionDBOperations;
 import cucumber.api.java.en.Then;
@@ -46,6 +46,16 @@ public class BillPayStepDef {
         }
     }
 
+    @Then("^I validate the statement if the transactions created with the following details$")
+    public void iValidateTheStatementIfTheTransactionsCreatedWithTheFollowingDetails(List<Map<String, String>> data) throws IOException, SQLException, ClassNotFoundException {
+        BillPayService billPayService = new BillPayService();
+        final List<Map<String, String>> mapList = data;
+        for (Map<String, String> map : mapList) {
+            StatementResponse response = billPayService.getStatement("SU1234567");
+            Assert.assertEquals(map.get("error_code"), String.valueOf(response.getResponseCode()));
+        }
+    }
+
     @Then("^I validate the following details$")
     public void iValidateTheFollowing(List<Map<String, String>> data) throws IOException {
         final List<Map<String, String>> mapList = data;
@@ -70,7 +80,6 @@ public class BillPayStepDef {
 
         }
     }
-
 
 
 

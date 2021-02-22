@@ -1,7 +1,7 @@
 package com.cgp.apiClient.billPayService;
 
-import com.cgp.containers.responses.AccountResponse;
 import com.cgp.containers.responses.GenericResponse;
+import com.cgp.containers.responses.StatementResponse;
 import com.cgp.interfaces.getRequest.GetHttpRequestProcessor;
 import com.cgp.interfaces.postRequest.PostHttpRequestProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,9 +16,10 @@ public class BillPayService {
     ObjectMapper objectMapper;
 
     String billPayServiceUrl = System.getProperty("billpay.service.url");
+    String statmentServiceUrl = System.getProperty("statement.service.url");
 
     public GenericResponse doBillPay(String payee, BigDecimal amount, String description ) throws IOException {
-        getHttpRequestProcessor = new GetHttpRequestProcessor();
+
         postHttpRequestProcessor = new PostHttpRequestProcessor();
         String url = billPayServiceUrl+"/fundtransfer?to_account="+payee+"&description="+description+"&amount="+amount ;
 
@@ -26,6 +27,14 @@ public class BillPayService {
         HttpResponse response = postHttpRequestProcessor.executeGetRequests(url);
         objectMapper = new ObjectMapper();
         return objectMapper.readValue( response.getEntity().getContent(), GenericResponse.class);
+    }
+
+    public StatementResponse getStatement(String payee) throws IOException{
+        getHttpRequestProcessor = new GetHttpRequestProcessor();
+        String url = statmentServiceUrl + "/statement?payee="+payee;
+        HttpResponse response = getHttpRequestProcessor.executeGetRequests(url);
+        objectMapper = new ObjectMapper();
+        return objectMapper.readValue( response.getEntity().getContent(), StatementResponse.class);
     }
 
 }

@@ -252,6 +252,7 @@
                         <transactionDBUser>postgres</transactionDBUser>
                         <transactionDBPass>crosstown</transactionDBPass>
                         <transactionDBName>transaction</transactionDBName>
+                        <statement.service.url>http://webserver2.testondemand.ga:57581</statement.service.url>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

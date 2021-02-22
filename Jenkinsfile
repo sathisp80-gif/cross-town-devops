@@ -49,6 +49,7 @@ pipeline {
 	stage('Run Automation Test'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/runCucumber.sh'
+			sh 'sudo bash ./cross-town-devops/scripts/generate_report.sh'
 		}
 	}
 

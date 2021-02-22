@@ -48,10 +48,19 @@ pipeline {
 	}
 	stage('Run Automation Test'){
 		steps{
+			sh 'sudo sleep 10'
 			sh 'sudo bash  ./cross-town-devops/scripts/runCucumber.sh'
 			sh 'sudo bash ./cross-town-devops/scripts/generate_report.sh'
 		}
 	}
+	stage('Destroy') {
+      		input {
+        		message "Can we destroy?"
+      		}
+	      steps {
+        		 sh 'sudo bash  ./cross-town-devops/scripts/destroy_env.sh'
+      		}
+    	}
 
     }
 }

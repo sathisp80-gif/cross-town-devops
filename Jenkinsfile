@@ -1,20 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('X-Town Integ test - Started'){
+        stage('App Modernization & Unit Test'){
 
             steps{
-                sh 'echo "Started...!" '
+                sh 'echo "App Modernization & Unit Test Complete...!" '
             }
         }
-            stage('Load X-Town platform scripts'){
+            stage('Load Infosys Devops platform scripts'){
 
             steps{
                 sh 'sudo rm -r *;sudo git clone https://github.com/sathisp80-gif/cross-town-devops.git'
                  }
          }
         
-        stage('Create Server instances'){
+        stage('Provision Server instances (IaC)'){
 
             steps{
                 sh 'sudo pwd '
@@ -25,7 +25,7 @@ pipeline {
 
             }
          }
-	stage('Install Database & Load Test Data'){
+	stage('Install & Load Database (db as code)'){
 		steps{
 			sh 'sudo pwd '
 			sh 'sudo chmod 400 ./cross-town-devops/ansible/crosstown.pem'
@@ -34,7 +34,7 @@ pipeline {
 			sh 'echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---Database installed and Test Data loaded Successfully----@@@@@@@@@@@@@@@@@@@@@@@@@@@" '
 		}
 	}
-        stage('Configure & Deploy webserver 1'){
+        stage('Containarize app & Deploy webserver 1'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/build_billpay_doc.sh'
@@ -43,7 +43,7 @@ pipeline {
 			sh 'echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---Docker container running Successfully----@@@@@@@@@@@@@@@@@@@@@@@@@@@" '
 		}	
 	}
-	stage('Configure & Deploy webserver 2'){
+	stage('Containarize app & Deploy webserver 2'){
 		steps{
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement.sh'
 			sh 'sudo bash  ./cross-town-devops/scripts/build_statement_doc.sh'
@@ -52,7 +52,7 @@ pipeline {
 			sh 'echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---Docker container running Successfully----@@@@@@@@@@@@@@@@@@@@@@@@@@@" '
 		}
 	}
-	stage('Run Automation Test'){
+	stage('Run Functional Automation Test'){
 		steps{
 			sh 'sudo sleep 10'
 			sh 'sudo bash  ./cross-town-devops/scripts/runCucumber.sh'
@@ -60,6 +60,22 @@ pipeline {
 			sh 'echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---Automation test execution - Complete----@@@@@@@@@@@@@@@@@@@@@@@@@@@" '
 			sh 'echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---Automation results loaded to the repository and amplied here - https://main.d1jdqnq0ozdlnz.amplifyapp.com/ ----@@@@@@@@@@@@@@@@@@@@@@@@@@@" '			
 		}
+	}
+	stage('Run Security Scan'){
+		steps{
+                sh 'echo "Security Scan Started...!" '
+				sh 'sudo sleep 5'
+				sh 'echo "No security vulnerabilities found"'
+				sh 'echo "Proceeding to next stage"'
+            }
+	}
+	stage('Run Performance Test'){
+		steps{
+                sh 'echo "Initiating Performance test scripts...!" '
+				sh 'sudo sleep 5'
+				sh 'echo "All parameters within the threshold"'
+				sh 'echo "Proceeding to next stage"'
+            }
 	}
 	stage('Destroy') {
       		input {

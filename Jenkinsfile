@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('App Modernization & Unit Test'){
+        stage('App Modernization & Unit Test check'){
 
             steps{
                 sh 'echo "App Modernization & Unit Test Complete...!" '
